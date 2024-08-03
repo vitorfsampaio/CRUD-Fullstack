@@ -15,9 +15,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  color: #333;
+`;
 
 function App() {
   const [users, setUsers] = useState([]);

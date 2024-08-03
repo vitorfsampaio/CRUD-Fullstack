@@ -10,8 +10,9 @@ const FormContainer = styled.form`
     flex-wrap: wrap;
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0px 0px 5px #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    max-width: 800px;
 `;
 
 const InputArea = styled.div`
@@ -20,23 +21,35 @@ const InputArea = styled.div`
 `;
 
 const Input = styled.input`
-    width: 120px;
+    width: 150px;
     padding: 0 10px;
-    border: 1px solid #bbb;
+    border: 1px solid #ddd;
     border-radius: 5px;
     height: 40px;
+    background-color: #f9f9f9;
+    color: #333;
+    &:focus {
+        border-color: #999;
+        outline: none;
+    }
 `;
 
-const Label = styled.label``;
+const Label = styled.label`
+    color: #555;
+`;
 
 const Button = styled.button`
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
     border: none;
-    background-color: #2c73d2;
+    background-color: #333;
     color: white;
     height: 42px;
+    transition: background-color 0.3s ease;
+    &:hover {
+        background-color: #555;
+    }
 `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {

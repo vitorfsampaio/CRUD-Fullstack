@@ -6,9 +6,9 @@ import { toast } from "react-toastify";
 
 const Table = styled.table`
     width: 100%;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px;
-    box-shadow: 0px 0px 5px #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     max-width: 800px;
     margin: 20px auto;
@@ -19,12 +19,18 @@ export const Thead = styled.thead``;
 
 export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr``;
+export const Tr = styled.tr`
+    &:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+`;
 
 export const Th = styled.th`
     text-align: start;
-    border-bottom: inset;
+    border-bottom: 2px solid #e0e0e0;
     padding-bottom: 5px;
+    color: #555;
+    font-weight: 500;
 
     @media (max-width: 500px) {
         ${(props) => props.onlyWeb && "display: none"}
@@ -35,6 +41,7 @@ export const Td = styled.td`
     padding-top: 15px;
     text-align: ${(props) => (props.alignCenter ? "center" : "start")};
     width: ${(props) => (props.width ? props.width : "auto")};
+    color: #333;
 
     @media (max-width: 500px) {
         ${(props) => props.onlyWeb && "display: none"}
@@ -80,10 +87,10 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
                             {item.fone}
                         </Td>
                         <Td alignCenter width="5%">
-                            <FaEdit onClick={() => handleEdit(item)} />
+                            <FaEdit onClick={() => handleEdit(item)} style={{ color: '#555', cursor: 'pointer' }} />
                         </Td>
                         <Td alignCenter width="5%">
-                            <FaTrash onClick={() => handleDelete(item.id)} />
+                            <FaTrash onClick={() => handleDelete(item.id)} style={{ color: '#e63946', cursor: 'pointer' }} />
                         </Td>
                     </Tr>
                 ))}
@@ -91,8 +98,5 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         </Table>
     )
 }
-
-/*
-*/
 
 export default Grid;
