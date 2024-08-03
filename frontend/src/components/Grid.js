@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -41,7 +41,25 @@ export const Td = styled.td`
     }
 `;
 
-const Grid = ({ users }) => {
+const Grid = ({ users, setUsers, setOnEdit }) => {
+    const handleEdit = (item) => {
+        setOnEdit(item);
+    }
+
+    const handleDelete = async (id) => {
+        await axios
+            .delete("http://localhost:8800/" + id)
+            .then(({ data }) => {
+                const newArray = users.filter((user) => user.id !== id);
+
+                setUsers(newArray);
+                toast.success(data);
+            })
+            .catch(({ data }) => toast.error(data));
+
+        setOnEdit(null);
+    };
+
     return (
         <Table>
             <Thead>
@@ -54,25 +72,27 @@ const Grid = ({ users }) => {
                 </Tr>
             </Thead>
             <Tbody>
-                {users.map((item, i) => {
+                {users.map((item, i) => (
                     <Tr key={i}>
                         <Td width="30%">{item.nome}</Td>
                         <Td width="30%">{item.email}</Td>
-                        <Td width="20%" onlyWeb>{item.fone}</Td>
-                        <Td alignCenter width="5%">
-                            <FaEdit />
+                        <Td width="20%" onlyWeb>
+                            {item.fone}
                         </Td>
                         <Td alignCenter width="5%">
-                            <FaEdit />
+                            <FaEdit onClick={() => handleEdit(item)} />
                         </Td>
                         <Td alignCenter width="5%">
-                            <FaTrash />
+                            <FaTrash onClick={() => handleDelete(item.id)} />
                         </Td>
                     </Tr>
-                })}
+                ))}
             </Tbody>
         </Table>
     )
 }
+
+/*
+*/
 
 export default Grid;
